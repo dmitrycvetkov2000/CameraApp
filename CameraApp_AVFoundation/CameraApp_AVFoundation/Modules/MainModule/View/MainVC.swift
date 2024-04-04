@@ -12,12 +12,21 @@ final class MainVC: UIViewController {
     let topImagesView = TopViewForImages()
     private let buttonForUpdatePhoto = UIButton()
     private let cameraVC: CameraVC
+    private let imagePicker: ImagePicker
     private let popOverVC = CustopPopOverVC()
+    
+    private lazy var completionImagePicker: ((UIImage) -> ())? = { image in
+        self.setPhoto(photo: image)
+    }
     
     init(viewModel: MainViewModelProtocol, cameraViewModel: CameraViewModelProtocol) {
         self.viewModel = viewModel
         self.cameraVC = CameraVC(viewModel: cameraViewModel)
+        self.imagePicker = ImagePicker(imagePickerVC: UIImagePickerController())
+        
         super.init(nibName: nil, bundle: nil)
+        
+        self.imagePicker.completion = completionImagePicker
     }
     
     required init?(coder: NSCoder) {
@@ -80,7 +89,6 @@ private extension MainVC {
         showPopover(sourceView: topImagesView.buttonForChangeMainPhoto, x: topImagesView.buttonForChangeMainPhoto.bounds.midX, y: topImagesView.buttonForChangeMainPhoto.bounds.maxY)
 
     }
-    
     @objc func changeAvatarPhoto() {
         self.viewModel.isAvatarChange.value = true
         showPopover(sourceView: topImagesView.buttonForChangeAvatarPhoto, x: topImagesView.buttonForChangeAvatarPhoto.bounds.midX, y: topImagesView.buttonForChangeAvatarPhoto.bounds.maxY)
@@ -106,6 +114,7 @@ private extension MainVC {
             present(popOverVC, animated: true)
         }
     }
+    
     func addTapGesturesOnViewsOfPopover() {
         let gestureRecognizerOpenGallery = UITapGestureRecognizer(target: self, action: #selector(openGallery))
         popOverVC.viewForOpenGallery.addGestureRecognizer(gestureRecognizerOpenGallery)
@@ -113,20 +122,21 @@ private extension MainVC {
         let gestureRecognizerOpenCamera = UITapGestureRecognizer(target: self, action: #selector(openCamera))
         popOverVC.viewForOpenCamera.addGestureRecognizer(gestureRecognizerOpenCamera)
     }
-    
     @objc func openCamera() {
         print("openCamera")
-
-        if self.presentedViewController == nil {
-            self.present(self.cameraVC, animated: true, completion: nil)
-        } else {
-            self.presentedViewController!.present(self.cameraVC, animated: true, completion: nil)
-        }
-
+        openCameraOrGalleryModule(vc: self.cameraVC)
     }
     @objc func openGallery() {
-        // To Do
         print("openGallery")
+        openCameraOrGalleryModule(vc: self.imagePicker.imagePickerVC ?? UIImagePickerController())
+    }
+    
+    private func openCameraOrGalleryModule(vc: UIViewController) {
+        if self.presentedViewController == nil {
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            self.presentedViewController!.present(vc, animated: true, completion: nil)
+        }
     }
 }
 
