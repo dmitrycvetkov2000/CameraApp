@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class MainVC: UIViewController {
     let viewModel: MainViewModelProtocol
     let topImagesView = TopViewForImages()
+    let containerTextFieldsView = UIView()
+    let textFieldsView = UIHostingController(rootView: TextFieldsView())
     private let buttonForUpdatePhoto = UIButton()
     private let cameraVC: CameraVC
     private let imagePicker: ImagePicker
@@ -44,8 +47,14 @@ final class MainVC: UIViewController {
         addTapGesturesOnViewsOfPopover()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        textFieldsView.view.frame = containerTextFieldsView.bounds
+    }
+    
     private func setupViews() {
         setupTopImagesView()
+        setupTextFieldsView()
         addTargetsOnButtons()
         cameraVC.delegateOfCamera = self
         self.view.backgroundColor = .brown
@@ -97,6 +106,28 @@ private extension MainVC {
     
 }
 
+// MARK: TextFieldsView
+private extension MainVC {
+    func setupTextFieldsView() {
+        containerTextFieldsView.translatesAutoresizingMaskIntoConstraints = false
+        textFieldsView.view.backgroundColor = .clear
+        self.view.addSubview(containerTextFieldsView)
+    
+        NSLayoutConstraint.activate([
+            containerTextFieldsView.topAnchor.constraint(equalTo: self.topImagesView.avatarImageView.bottomAnchor, constant: 0),
+            containerTextFieldsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            containerTextFieldsView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1),
+            containerTextFieldsView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+        
+        addChild(textFieldsView)
+        
+        textFieldsView.view.frame = containerTextFieldsView.bounds
+        containerTextFieldsView.addSubview(textFieldsView.view)
+        textFieldsView.didMove(toParent: self)
+    }
+}
+
 // MARK: Popover
 private extension MainVC {
     func showPopover(sourceView: UIView, x: CGFloat, y: CGFloat) {
@@ -140,6 +171,8 @@ private extension MainVC {
     }
 }
 
-
+#Preview("UIKit") {
+    MainVC(viewModel: MainViewModel(), cameraViewModel: CameraViewModel())
+}
 
 

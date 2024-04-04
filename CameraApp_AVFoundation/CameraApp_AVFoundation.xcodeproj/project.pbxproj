@@ -15,6 +15,8 @@
 		0A38F5722BAB5D630099C074 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A38F5712BAB5D630099C074 /* CameraService.swift */; };
 		0A6DE42B2BBEA2A300E2FED3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6DE42A2BBEA2A300E2FED3 /* ImagePicker.swift */; };
 		0A6DE4322BBF2D7D00E2FED3 /* ImagePickerVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6DE4312BBF2D7D00E2FED3 /* ImagePickerVC+Extensions.swift */; };
+		0A6DE4372BBF3E4C00E2FED3 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6DE4362BBF3E4C00E2FED3 /* CustomTextField.swift */; };
+		0A6DE4392BBF608200E2FED3 /* TextFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6DE4382BBF608200E2FED3 /* TextFieldsView.swift */; };
 		0AB7D5422BB0ADFC00DE1929 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB7D5412BB0ADFC00DE1929 /* MainVC.swift */; };
 		0AB7D5442BB0AE2700DE1929 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB7D5432BB0AE2700DE1929 /* MainViewModel.swift */; };
 		0AB7D5472BB0B09300DE1929 /* TopViewForImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB7D5462BB0B09300DE1929 /* TopViewForImages.swift */; };
@@ -37,6 +39,8 @@
 		0A38F5712BAB5D630099C074 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		0A6DE42A2BBEA2A300E2FED3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0A6DE4312BBF2D7D00E2FED3 /* ImagePickerVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePickerVC+Extensions.swift"; sourceTree = "<group>"; };
+		0A6DE4362BBF3E4C00E2FED3 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		0A6DE4382BBF608200E2FED3 /* TextFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsView.swift; sourceTree = "<group>"; };
 		0AB7D5412BB0ADFC00DE1929 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		0AB7D5432BB0AE2700DE1929 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		0AB7D5462BB0B09300DE1929 /* TopViewForImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewForImages.swift; sourceTree = "<group>"; };
@@ -112,6 +116,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0A6DE43A2BBF684C00E2FED3 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				0A6DE4382BBF608200E2FED3 /* TextFieldsView.swift */,
+				0A6DE4362BBF3E4C00E2FED3 /* CustomTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
 		0AB7D5452BB0B06000DE1929 /* MainModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +141,7 @@
 			children = (
 				0AB7D5462BB0B09300DE1929 /* TopViewForImages.swift */,
 				0AB7D5482BB0D78800DE1929 /* CustopPopOverVC.swift */,
+				0A6DE43A2BBF684C00E2FED3 /* TextFields */,
 			);
 			path = HelpersView;
 			sourceTree = "<group>";
@@ -313,9 +327,11 @@
 				0AB7D55B2BB1180700DE1929 /* MainVC+CameraDelegate.swift in Sources */,
 				0AB7D5492BB0D78800DE1929 /* CustopPopOverVC.swift in Sources */,
 				0AB7D5422BB0ADFC00DE1929 /* MainVC.swift in Sources */,
+				0A6DE4372BBF3E4C00E2FED3 /* CustomTextField.swift in Sources */,
 				0AB7D54B2BB0FBE800DE1929 /* Observable.swift in Sources */,
 				0A38F5622BAB5D330099C074 /* CameraVC.swift in Sources */,
 				0AB7D5582BB1174700DE1929 /* CameraVC+AVCapturePhotoCaptureDelegate.swift in Sources */,
+				0A6DE4392BBF608200E2FED3 /* TextFieldsView.swift in Sources */,
 				0A38F55E2BAB5D330099C074 /* AppDelegate.swift in Sources */,
 				0A38F5602BAB5D330099C074 /* SceneDelegate.swift in Sources */,
 				0AB7D5442BB0AE2700DE1929 /* MainViewModel.swift in Sources */,
