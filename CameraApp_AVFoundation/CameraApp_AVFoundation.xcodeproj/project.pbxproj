@@ -17,6 +17,11 @@
 		0A6DE4322BBF2D7D00E2FED3 /* ImagePickerVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6DE4312BBF2D7D00E2FED3 /* ImagePickerVC+Extensions.swift */; };
 		0A6DE4372BBF3E4C00E2FED3 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6DE4362BBF3E4C00E2FED3 /* CustomTextField.swift */; };
 		0A6DE4392BBF608200E2FED3 /* TextFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6DE4382BBF608200E2FED3 /* TextFieldsView.swift */; };
+		0A8404582BCD741300C3F274 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8404572BCD741300C3F274 /* RealmManager.swift */; };
+		0A84045B2BCD74CA00C3F274 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A84045A2BCD74CA00C3F274 /* Realm */; };
+		0A84045D2BCD74CA00C3F274 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A84045C2BCD74CA00C3F274 /* RealmSwift */; };
+		0A84045F2BCD7FF800C3F274 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A84045E2BCD7FF800C3F274 /* User.swift */; };
+		0A8404612BCD8AE900C3F274 /* TextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8404602BCD8AE900C3F274 /* TextFieldViewModel.swift */; };
 		0AB7D5422BB0ADFC00DE1929 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB7D5412BB0ADFC00DE1929 /* MainVC.swift */; };
 		0AB7D5442BB0AE2700DE1929 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB7D5432BB0AE2700DE1929 /* MainViewModel.swift */; };
 		0AB7D5472BB0B09300DE1929 /* TopViewForImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB7D5462BB0B09300DE1929 /* TopViewForImages.swift */; };
@@ -41,6 +46,9 @@
 		0A6DE4312BBF2D7D00E2FED3 /* ImagePickerVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePickerVC+Extensions.swift"; sourceTree = "<group>"; };
 		0A6DE4362BBF3E4C00E2FED3 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		0A6DE4382BBF608200E2FED3 /* TextFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsView.swift; sourceTree = "<group>"; };
+		0A8404572BCD741300C3F274 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		0A84045E2BCD7FF800C3F274 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0A8404602BCD8AE900C3F274 /* TextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModel.swift; sourceTree = "<group>"; };
 		0AB7D5412BB0ADFC00DE1929 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		0AB7D5432BB0AE2700DE1929 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		0AB7D5462BB0B09300DE1929 /* TopViewForImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewForImages.swift; sourceTree = "<group>"; };
@@ -57,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A84045D2BCD74CA00C3F274 /* RealmSwift in Frameworks */,
+				0A84045B2BCD74CA00C3F274 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +94,7 @@
 			children = (
 				0AB7D5532BB112F300DE1929 /* Application */,
 				0AB7D5552BB1131500DE1929 /* Modules */,
+				0A8404562BCD73DD00C3F274 /* BD */,
 				0AB7D54F2BB1100000DE1929 /* Services */,
 				0AB7D5522BB112E700DE1929 /* Binding */,
 				0AB7D5542BB1130200DE1929 /* Resources */,
@@ -120,9 +131,19 @@
 			isa = PBXGroup;
 			children = (
 				0A6DE4382BBF608200E2FED3 /* TextFieldsView.swift */,
+				0A8404602BCD8AE900C3F274 /* TextFieldViewModel.swift */,
 				0A6DE4362BBF3E4C00E2FED3 /* CustomTextField.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		0A8404562BCD73DD00C3F274 /* BD */ = {
+			isa = PBXGroup;
+			children = (
+				0A8404572BCD741300C3F274 /* RealmManager.swift */,
+				0A84045E2BCD7FF800C3F274 /* User.swift */,
+			);
+			path = BD;
 			sourceTree = "<group>";
 		};
 		0AB7D5452BB0B06000DE1929 /* MainModule */ = {
@@ -266,6 +287,10 @@
 			dependencies = (
 			);
 			name = CameraApp_AVFoundation;
+			packageProductDependencies = (
+				0A84045A2BCD74CA00C3F274 /* Realm */,
+				0A84045C2BCD74CA00C3F274 /* RealmSwift */,
+			);
 			productName = CameraApp_AVFoundation;
 			productReference = 0A38F55A2BAB5D330099C074 /* CameraApp_AVFoundation.app */;
 			productType = "com.apple.product-type.application";
@@ -294,6 +319,9 @@
 				Base,
 			);
 			mainGroup = 0A38F5512BAB5D330099C074;
+			packageReferences = (
+				0A8404592BCD74CA00C3F274 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 0A38F55B2BAB5D330099C074 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -320,11 +348,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8404612BCD8AE900C3F274 /* TextFieldViewModel.swift in Sources */,
 				0AB7D55D2BB1184C00DE1929 /* MainVC+UIPopoverPresentationControllerDelegate.swift in Sources */,
 				0AB7D5472BB0B09300DE1929 /* TopViewForImages.swift in Sources */,
 				0A38F5722BAB5D630099C074 /* CameraService.swift in Sources */,
 				0A6DE42B2BBEA2A300E2FED3 /* ImagePicker.swift in Sources */,
 				0AB7D55B2BB1180700DE1929 /* MainVC+CameraDelegate.swift in Sources */,
+				0A8404582BCD741300C3F274 /* RealmManager.swift in Sources */,
 				0AB7D5492BB0D78800DE1929 /* CustopPopOverVC.swift in Sources */,
 				0AB7D5422BB0ADFC00DE1929 /* MainVC.swift in Sources */,
 				0A6DE4372BBF3E4C00E2FED3 /* CustomTextField.swift in Sources */,
@@ -337,6 +367,7 @@
 				0AB7D5442BB0AE2700DE1929 /* MainViewModel.swift in Sources */,
 				0A6DE4322BBF2D7D00E2FED3 /* ImagePickerVC+Extensions.swift in Sources */,
 				0AB7D5602BB1195900DE1929 /* CameraViewModel.swift in Sources */,
+				0A84045F2BCD7FF800C3F274 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +582,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A8404592BCD74CA00C3F274 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0A84045A2BCD74CA00C3F274 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A8404592BCD74CA00C3F274 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		0A84045C2BCD74CA00C3F274 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A8404592BCD74CA00C3F274 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A38F5522BAB5D330099C074 /* Project object */;
 }

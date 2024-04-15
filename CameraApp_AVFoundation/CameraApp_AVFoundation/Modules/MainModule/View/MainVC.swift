@@ -66,6 +66,7 @@ final class MainVC: UIViewController {
         setupTopImagesView()
         setupTextFieldsView()
         addTargetsOnButtons()
+        setSaveBtn()
         cameraVC.delegateOfCamera = self
         self.view.backgroundColor = .brown
     }
@@ -83,6 +84,40 @@ final class MainVC: UIViewController {
             }
         }
         
+    }
+    
+    private func setSaveBtn() {
+        let btn = UIButton()
+        btn.backgroundColor = .green
+        btn.layer.cornerRadius = 20
+        btn.setTitle("Save", for: .normal)
+        btn.setTitleColor(.darkGray, for: .normal)
+        
+        btn.frame = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY - 80, width: 200, height: 40)
+        btn.center.x = self.view.center.x
+        
+        self.view.addSubview(btn)
+        
+        btn.addTarget(self, action: #selector(saveToBD), for: .touchUpInside)
+    }
+    
+    @objc func saveToBD() {
+        let user = User()
+        setValues(user: user)
+        
+        RealmManager.shared.saveObject(object: user) { object in
+            setValues(user: user)
+        }
+    }
+    
+    private func setValues(user: AnyObject) {
+        if let user = user as? User {
+            try! RealmManager.shared.realm.write {
+                user.name = self.textFieldsView.rootView.viewModel.name
+                user.city = self.textFieldsView.rootView.viewModel.city
+            }
+        }
+
     }
 }
 
@@ -135,6 +170,8 @@ private extension MainVC {
         textFieldsView.view.frame = containerTextFieldsView.bounds
         containerTextFieldsView.addSubview(textFieldsView.view)
         textFieldsView.didMove(toParent: self)
+        
+        self.textFieldsView.rootView.viewModel.setupTextsOnTextFeilds()
     }
 }
 
@@ -181,10 +218,6 @@ private extension MainVC {
     }
 }
 
-#Preview("UIKit") {
-    MainVC(viewModel: MainViewModel(), cameraViewModel: CameraViewModel())
-}
-
 // MARK: Animation
 private extension MainVC {
     func setAnimatedView() {
@@ -229,4 +262,8 @@ private extension MainVC {
         
         shapeLayer.path = path2.cgPath
     }
+}
+
+#Preview("UIKit") {
+    MainVC(viewModel: MainViewModel(), cameraViewModel: CameraViewModel())
 }

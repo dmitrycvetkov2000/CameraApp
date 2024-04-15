@@ -40,6 +40,27 @@ final class TopViewForImages: UIView {
         setupButtonForChangeMainPhoto()
     }
     
+    private func setImage(isAvatar: Bool) {
+        let users = RealmManager.shared.getObjects(type: User.self)
+        if let user = users.first as? User {
+            if isAvatar && user.avatar != nil {
+                avatarImageView.image = UIImage(data: user.avatar ?? Data())
+            } else if isAvatar && user.avatar == nil {
+                avatarImageView.image = UIImage(systemName: "person.and.background.dotted")
+            }
+            
+            if !isAvatar && user.mainPhoto != nil {
+                mainImageView.image = UIImage(data: user.mainPhoto ?? Data())
+            } else if !isAvatar && user.mainPhoto == nil {
+                mainImageView.image = UIImage(systemName: "person.and.background.dotted")
+            }
+            
+        } else {
+            mainImageView.image = UIImage(systemName: "person.and.background.dotted")
+            avatarImageView.image = UIImage(systemName: "person.and.background.dotted")
+        }
+    }
+    
 }
 
 // MARK: MainItems
@@ -59,6 +80,8 @@ private extension TopViewForImages {
         mainImageView.image = UIImage(systemName: "photo.fill")
         mainImageView.clipsToBounds = true
         mainImageView.backgroundColor = .systemGreen
+        
+        setImage(isAvatar: false)
     }
     
     func makeButtonForChangeMainPhoto() {
@@ -98,7 +121,8 @@ private extension TopViewForImages {
             avatarImageView.heightAnchor.constraint(equalTo: mainImageView.widthAnchor, multiplier: 0.5)
         ])
         
-        avatarImageView.image = UIImage(systemName: "person.and.background.dotted")
+        setImage(isAvatar: true)
+        
     }
     
     func settingAvatarImageView() {
