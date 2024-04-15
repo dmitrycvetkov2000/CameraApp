@@ -17,6 +17,14 @@ final class MainVC: UIViewController {
     private let cameraVC: CameraVC
     private let imagePicker: ImagePicker
     private let popOverVC = CustopPopOverVC()
+    private var animation: CAKeyframeAnimation?
+    
+    private var animatedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        
+        return view
+    }()
     
     private lazy var completionImagePicker: ((UIImage) -> ())? = { image in
         self.setPhoto(photo: image)
@@ -45,6 +53,8 @@ final class MainVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addTapGesturesOnViewsOfPopover()
+        setAnimatedView()
+        startAnimation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -175,4 +185,48 @@ private extension MainVC {
     MainVC(viewModel: MainViewModel(), cameraViewModel: CameraViewModel())
 }
 
+// MARK: Animation
+private extension MainVC {
+    func setAnimatedView() {
+        self.view.addSubview(animatedView)
+        animatedView.frame = CGRect(x: 0, y: self.view.bounds.maxY, width: 40, height: 40)
+        setArrowOnView()
+    }
+    
+    func setupAnimation() {
+        let path = UIBezierPath()
+        path.lineWidth = 2
+        path.move(to: CGPoint(x: 0, y: self.view.bounds.maxY))
+        path.addCurve(to: CGPoint(x: self.topImagesView.buttonForChangeAvatarPhoto.frame.minX - animatedView.bounds.width / 2, y: self.topImagesView.buttonForChangeAvatarPhoto.frame.maxY), controlPoint1: CGPoint(x: 100, y: 100), controlPoint2: CGPoint(x: 200, y: 100))
+        
+        animation = CAKeyframeAnimation(keyPath: "position")
+        animation?.path = path.cgPath
 
+        animation?.repeatCount = Float.infinity
+        animation?.duration = 5.0
+    }
+    
+    func startAnimation() {
+        setupAnimation()
+        guard let animation = animation else { return }
+        self.animatedView.layer.add(animation, forKey: nil)
+    }
+    
+    func setArrowOnView() {
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = 5
+        shapeLayer.strokeColor = UIColor.yellow.cgColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        
+        animatedView.layer.addSublayer(shapeLayer)
+        
+        let path2 = UIBezierPath()
+        path2.move(to: CGPoint(x: 0, y: animatedView.bounds.maxY))
+        path2.addLine(to: CGPoint(x: animatedView.bounds.maxX, y: animatedView.bounds.minY))
+        path2.addLine(to: CGPoint(x: animatedView.bounds.maxX, y: animatedView.bounds.midY))
+        path2.move(to: CGPoint(x: animatedView.bounds.maxX, y: animatedView.bounds.minY))
+        path2.addLine(to: CGPoint(x: animatedView.bounds.midX, y: animatedView.bounds.minY))
+        
+        shapeLayer.path = path2.cgPath
+    }
+}
